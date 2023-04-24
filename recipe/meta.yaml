@@ -77,7 +77,6 @@ outputs:
 
   - name: cuda-nvcc_{{ target_platform }}
     build:
-      noarch: generic
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
@@ -103,11 +102,6 @@ outputs:
 
   - name: cuda-nvcc-impl_{{ target_platform }}
     build:
-      noarch: generic
-      missing_dso_whitelist:
-        # Need to avoid missing linkage errors due to `noarch`.
-        # Library dependencies are pulled in.
-        - "*"
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
