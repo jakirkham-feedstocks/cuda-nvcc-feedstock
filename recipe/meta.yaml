@@ -78,9 +78,9 @@ outputs:
   - name: cuda-nvcc_{{ target_platform }}
     build:
       noarch: generic
-    run_exports:
-      strong:
-        - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
+      run_exports:
+        strong:
+          - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
     files:
       - etc/conda/activate.d/~cuda-nvcc_activate.sh      # [linux]
       - etc/conda/deactivate.d/~cuda-nvcc_deactivate.sh  # [linux]
@@ -108,9 +108,9 @@ outputs:
         # Need to avoid missing linkage errors due to `noarch`.
         # Library dependencies are pulled in.
         - "*"
-    run_exports:
-      strong:
-        - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
+      run_exports:
+        strong:
+          - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
     files:
       - targets/{{ target_name }}/bin      # [linux]
       - targets/{{ target_name }}/nvvm     # [linux]
