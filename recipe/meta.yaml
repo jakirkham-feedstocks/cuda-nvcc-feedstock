@@ -47,6 +47,11 @@ outputs:
         - cuda-cudart-dev
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
+        - binutils               # [linux]
+        - gcc                    # [linux]
+        - gxx                    # [linux]
         - {{ pin_subpackage("cuda-nvcc_" + target_platform, exact=True) }}
         - cuda-cudart-dev
       run_constrained:
@@ -54,8 +59,6 @@ outputs:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
       requires:
-        - {{ compiler("c") }}
-        - {{ compiler("cxx") }}
         - cmake
         - ninja
       files:
