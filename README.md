@@ -16,34 +16,8 @@ Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
 
-About cuda-nvcc-impl_linux-aarch64
+About cuda-nvcc-impl_linux-ppc64le
 ----------------------------------
-
-Home: https://developer.nvidia.com/cuda-toolkit
-
-Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
-
-Summary: Compiler for CUDA applications.
-
-Documentation: https://docs.nvidia.com/cuda/index.html
-
-Compiler for CUDA applications.
-
-About cuda-nvcc_linux-aarch64
------------------------------
-
-Home: https://developer.nvidia.com/cuda-toolkit
-
-Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
-
-Summary: Compiler for CUDA applications.
-
-Documentation: https://docs.nvidia.com/cuda/index.html
-
-Compiler for CUDA applications.
-
-About cuda-nvcc-impl_linux-64
------------------------------
 
 Home: https://developer.nvidia.com/cuda-toolkit
 
@@ -68,6 +42,32 @@ Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
 
+About cuda-nvcc-impl_linux-aarch64
+----------------------------------
+
+Home: https://developer.nvidia.com/cuda-toolkit
+
+Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
+
+Summary: Compiler for CUDA applications.
+
+Documentation: https://docs.nvidia.com/cuda/index.html
+
+Compiler for CUDA applications.
+
+About cuda-nvcc-impl_linux-64
+-----------------------------
+
+Home: https://developer.nvidia.com/cuda-toolkit
+
+Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
+
+Summary: Compiler for CUDA applications.
+
+Documentation: https://docs.nvidia.com/cuda/index.html
+
+Compiler for CUDA applications.
+
 About cuda-nvcc
 ---------------
 
@@ -81,8 +81,8 @@ Documentation: https://docs.nvidia.com/cuda/index.html
 
 Compiler for CUDA applications.
 
-About cuda-nvcc-impl_linux-ppc64le
-----------------------------------
+About cuda-nvcc_linux-aarch64
+-----------------------------
 
 Home: https://developer.nvidia.com/cuda-toolkit
 
