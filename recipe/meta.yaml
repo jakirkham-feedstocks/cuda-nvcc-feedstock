@@ -1,29 +1,25 @@
 {% set name = "cuda-nvcc-split" %}
 {% set version = "12.0.76" %}
 {% set cuda_version = "12.0" %}
+{% set platform = "linux-x86_64" %}  # [cross_target_platform == "linux-64"]
+{% set platform = "linux-ppc64le" %}  # [cross_target_platform == "linux-ppc64le"]
+{% set platform = "linux-sbsa" %}  # [cross_target_platform == "linux-aarch64"]
+{% set cross_target_name = "x86_64-linux" %}  # [cross_target_platform == "linux-64"]
+{% set cross_target_name = "ppc64le-linux" %}  # [cross_target_platform == "linux-ppc64le"]
+{% set cross_target_name = "sbsa-linux" %}  # [cross_target_platform == "linux-aarch64"]
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/linux-x86_64/cuda_nvcc-linux-x86_64-{{ version }}-archive.tar.xz
-    sha256: 160ca9f8828f53daa4b2066c5361aacb45fa2575885f70c223cda1d11df53d6f
-    folder: targets/x86_64-linux
-    patches:
-      - nvcc.profile.patch
-
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/linux-ppc64le/cuda_nvcc-linux-ppc64le-{{ version }}-archive.tar.xz
-    sha256: dc5bd7eac57b32a9645c0c23c6a1ba8a9533e846eeec31414e1aa4230afee2f8
-    folder: targets/ppc64le-linux
-    patches:
-      - nvcc.profile.patch
-
-  - url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/linux-sbsa/cuda_nvcc-linux-sbsa-{{ version }}-archive.tar.xz
-    sha256: 85c8c643ea2cfa398e1b5ffcd597f5bb3b738526c9e3fb8e39dd909c55345f36
-    folder: targets/sbsa-linux
-    patches:
-      - nvcc.profile.patch
+  url: url: https://developer.download.nvidia.com/compute/cuda/redist/cuda_nvcc/{{ platform }}/cuda_nvcc-{{ platform }}-{{ version }}-archive.tar.xz
+  sha256: 160ca9f8828f53daa4b2066c5361aacb45fa2575885f70c223cda1d11df53d6f  # [cross_target_platform == "linux-ppc64le"]
+  sha256: dc5bd7eac57b32a9645c0c23c6a1ba8a9533e846eeec31414e1aa4230afee2f8  # [ppc64le]
+  sha256: 85c8c643ea2cfa398e1b5ffcd597f5bb3b738526c9e3fb8e39dd909c55345f36  # [cross_target_platform == "linux-aarch64"]
+  folder: targets/{{ cross_target_name }}
+  patches:
+    - nvcc.profile.patch
 
 build:
   number: 3
