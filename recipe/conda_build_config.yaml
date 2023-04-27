@@ -5,7 +5,7 @@ cxx_compiler_version:      # [linux]
 arm_variant_type:  # [aarch64]
   - sbsa           # [aarch64]
 
-impl_cross_target_platform:
+cross_target_impl_platform:
   - linux-64
   - linux-aarch64
   - linux-ppc64le
