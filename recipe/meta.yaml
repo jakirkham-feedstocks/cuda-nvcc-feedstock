@@ -141,7 +141,7 @@ outputs:
         - cuda-driver-dev_{{ cross_target_impl_platform }}
       run_constrained:
         - gcc_impl_{{ cross_target_impl_platform }} >=6,<13  # [linux]
-        - arm-variant * {{ arm_variant_type }}          # [aarch64]
+        - arm-variant * {{ arm_variant_type }}               # [cross_target_impl_platform == "linux-aarch64"]
     test:
       commands:
         - test -f $PREFIX/targets/{{ ctk_targets[cross_target_impl_platform] }}/bin/nvcc                          # [linux]
