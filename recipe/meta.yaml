@@ -2,6 +2,12 @@
 {% set version = "12.0.76" %}
 {% set cuda_version = "12.0" %}
 
+{% set ctk_targets = {
+  "linux-64": "x86_64-linux",
+  "linux-aarch64": "sbsa-linux",
+  "linux-ppc64le": "ppc64le-linux",
+} %}
+
 package:
   name: {{ name|lower }}
   version: {{ version }}
@@ -71,7 +77,8 @@ outputs:
         - cmake -S . -B ./build -G=Ninja && cmake --build ./build -v
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: {{ PREFIX }}/targets/{{ cross_target_name }}/LICENSE
+      license_file:
+        - {{ PREFIX }}/targets/{{ ctk_targets[target_platform] }}/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
@@ -79,7 +86,7 @@ outputs:
         Compiler for CUDA applications.
       doc_url: https://docs.nvidia.com/cuda/index.html
 
-  - name: cuda-nvcc_{{ target_platform }}
+  - name: cuda-nvcc_{{ cross_target_platform }}
     build:
       run_exports:
         strong:
@@ -99,7 +106,8 @@ outputs:
         - test -f $PREFIX/etc/conda/deactivate.d/~cuda-nvcc_deactivate.sh  # [linux]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: {{ PREFIX }}/targets/{{ cross_target_name }}/LICENSE
+      license_file:
+        - {{ PREFIX }}/targets/{{ ctk_targets[cross_target_platform] }}/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
@@ -107,46 +115,47 @@ outputs:
         Compiler for CUDA applications.
       doc_url: https://docs.nvidia.com/cuda/index.html
 
-  - name: cuda-nvcc-impl_{{ cross_target_platform }}
+  - name: cuda-nvcc-impl_{{ impl_cross_target_platform }}
     build:
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
     files:
-      - targets/{{ cross_target_name }}/bin      # [linux]
-      - targets/{{ cross_target_name }}/nvvm     # [linux]
-      - targets/{{ cross_target_name }}/include  # [linux]
-      - targets/{{ cross_target_name }}/lib      # [linux]
+      - targets/{{ ctk_targets[impl_cross_target_platform] }}/bin      # [linux]
+      - targets/{{ ctk_targets[impl_cross_target_platform] }}/nvvm     # [linux]
+      - targets/{{ ctk_targets[impl_cross_target_platform] }}/include  # [linux]
+      - targets/{{ ctk_targets[impl_cross_target_platform] }}/lib      # [linux]
       - Library\bin      # [win]
       - Library\nvvm     # [win]
       - Library\include  # [win]
       - Library\lib      # [win]
     requirements:
       build:
-        - {{ c_compiler }}_{{ cross_target_platform }}
-        - {{ cxx_compiler }}_{{ cross_target_platform }}
-        - arm-variant * {{ arm_variant_type }}            # [cross_target_platform == "linux-aarch64"]
-        - sysroot_{{ cross_target_platform }} 2.17        # [linux]
+        - {{ c_compiler }}_{{ impl_cross_target_platform }}
+        - {{ cxx_compiler }}_{{ impl_cross_target_platform }}
+        - arm-variant * {{ arm_variant_type }}            # [impl_cross_target_platform == "linux-aarch64"]
+        - sysroot_{{ impl_cross_target_platform }} 2.17        # [linux]
       host:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
       run_constrained:
-        - gcc_impl_{{ cross_target_platform }} >=6,<13  # [linux]
+        - gcc_impl_{{ impl_cross_target_platform }} >=6,<13  # [linux]
         - arm-variant * {{ arm_variant_type }}          # [aarch64]
     test:
       commands:
-        - test -f $PREFIX/targets/{{ cross_target_name }}/bin/nvcc                          # [linux]
-        - test -d $PREFIX/targets/{{ cross_target_name }}/nvvm                              # [linux]
-        - test -f $PREFIX/targets/{{ cross_target_name }}/lib/libnvptxcompiler_static.a     # [linux]
-        - test -f $PREFIX/targets/{{ cross_target_name }}/include/nvPTXCompiler.h           # [linux]
+        - test -f $PREFIX/targets/{{ ctk_targets[impl_cross_target_platform] }}/bin/nvcc                          # [linux]
+        - test -d $PREFIX/targets/{{ ctk_targets[impl_cross_target_platform] }}/nvvm                              # [linux]
+        - test -f $PREFIX/targets/{{ ctk_targets[impl_cross_target_platform] }}/lib/libnvptxcompiler_static.a     # [linux]
+        - test -f $PREFIX/targets/{{ ctk_targets[impl_cross_target_platform] }}/include/nvPTXCompiler.h           # [linux]
         - test ! -f $PREFIX/etc/conda/activate.d/~cuda-nvcc_activate.sh               # [linux]
         - test ! -f $PREFIX/etc/conda/deactivate.d/~cuda-nvcc_deactivate.sh           # [linux]
         - if not exist %LIBRARY_LIB%\nvptxcompiler_static.lib exit 1  # [win]
         - if not exist %LIBRARY_INC%\nvPTXCompiler.h exit 1           # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
-      license_file: {{ PREFIX }}/targets/{{ cross_target_name }}/LICENSE
+      license_file:
+        - {{ PREFIX }}/targets/{{ ctk_targets[impl_cross_target_platform] }}/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
@@ -156,7 +165,8 @@ outputs:
 
 about:
   home: https://developer.nvidia.com/cuda-toolkit
-  license_file: {{ PREFIX }}/targets/{{ cross_target_name }}/LICENSE
+  license_file:
+    - {{ PREFIX }}/targets/{{ ctk_targets[target_platform] }}/LICENSE
   license: LicenseRef-NVIDIA-End-User-License-Agreement
   license_url: https://docs.nvidia.com/cuda/eula/index.html
   summary: Compiler for CUDA applications.
