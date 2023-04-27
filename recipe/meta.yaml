@@ -38,8 +38,7 @@ build:
 outputs:
   - name: cuda-nvcc
     build:
-      skip: true  # [target_platform != cross_target_platform]
-      skip: true  # [target_platform != cross_target_impl_platform]
+      skip: true  # [not (target_platform == cross_target_platform == cross_target_impl_platform)]
     files:
       - bin                                               # [linux]
       - lib/libnvptxcompiler_static.a                     # [linux]
@@ -89,6 +88,7 @@ outputs:
 
   - name: cuda-nvcc_{{ cross_target_platform }}
     build:
+      skip: true  # [cross_target_platform != cross_target_impl_platform]
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
