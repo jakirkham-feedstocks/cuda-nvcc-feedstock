@@ -118,7 +118,7 @@ outputs:
 
   - name: cuda-nvcc-impl_{{ cross_target_impl_platform }}
     build:
-      skip: true  # [target_platform != cross_target_platform]
+      #skip: true  # [target_platform != cross_target_platform]
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
