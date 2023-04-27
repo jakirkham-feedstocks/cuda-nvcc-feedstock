@@ -98,7 +98,7 @@ outputs:
     requirements:
       run:
         # Safeguard for early parsing
-        {% if cross_target_platform is defined and  cross_target_impl_platform is defined %} 
+        {% if cross_target_platform is defined and cross_target_impl_platform is defined %}
         - {{ pin_subpackage("cuda-nvcc-impl_" + cross_target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvcc-impl_" + cross_target_impl_platform, exact=True) }}
         {% endif %}
