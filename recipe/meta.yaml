@@ -39,6 +39,7 @@ outputs:
   - name: cuda-nvcc
     build:
       skip: true  # [target_platform != cross_target_platform]
+      skip: true  # [target_platform != cross_target_impl_platform]
     files:
       - bin                                               # [linux]
       - lib/libnvptxcompiler_static.a                     # [linux]
