@@ -88,7 +88,6 @@ outputs:
 
   - name: cuda-nvcc_{{ cross_target_platform }}
     build:
-      skip: true  # [target_platform != cross_target_impl_platform]
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
@@ -98,9 +97,9 @@ outputs:
     requirements:
       run:
         # Safeguard for early parsing
-        {% if cross_target_platform is defined and cross_target_impl_platform is defined %}
+        {% if cross_target_platform is defined %}
         - {{ pin_subpackage("cuda-nvcc-impl_" + cross_target_platform, exact=True) }}
-        - {{ pin_subpackage("cuda-nvcc-impl_" + cross_target_impl_platform, exact=True) }}
+        - {{ pin_subpackage("cuda-nvcc-impl_" + target_platform, exact=True) }}
         {% endif %}
     test:
       commands:
@@ -119,6 +118,7 @@ outputs:
 
   - name: cuda-nvcc-impl_{{ cross_target_impl_platform }}
     build:
+      skip: true  # [target_platform != cross_target_platform]
       run_exports:
         strong:
           - cuda-version >={{ cuda_version }},<{{ cuda_version.split(".")[0]|int + 1 }}
