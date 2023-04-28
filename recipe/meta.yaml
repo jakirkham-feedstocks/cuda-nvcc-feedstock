@@ -36,7 +36,7 @@ build:
   skip: true  # [osx or win]
 
 outputs:
-  {% if target_platform == cross_target_platform == cross_target_impl_platform %}
+  {% if target_platform == tgt_platform == cross_target_platform == cross_target_impl_platform %}
   - name: cuda-nvcc
     files:
       - bin                                               # [linux]
