@@ -14,8 +14,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cross_target_impl_platform:
-- linux-ppc64le
 cross_target_platform:
 - linux-64
 cxx_compiler:
@@ -29,6 +27,3 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
-- - target_platform
-  - cross_target_platform
-  - cross_target_impl_platform
