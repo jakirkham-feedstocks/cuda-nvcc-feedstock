@@ -10,6 +10,15 @@ cross_target_platform:
   - linux-aarch64
   - linux-ppc64le
 cross_target_impl_platform:
-  - linux-64
-  - linux-aarch64
-  - linux-ppc64le
+  -
+    - linux-64
+    - linux-aarch64
+    - linux-ppc64le
+  -
+    - linux-64
+    - linux-aarch64
+    - linux-ppc64le
+  -
+    - linux-64
+    - linux-aarch64
+    - linux-ppc64le
