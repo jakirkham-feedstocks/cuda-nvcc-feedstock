@@ -9,10 +9,8 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cross_target_impl_platform:
-- linux-aarch64
-cross_target_platform:
 - linux-64
-- linux-aarch64
+cross_target_platform:
 - linux-ppc64le
 cxx_compiler:
 - gxx

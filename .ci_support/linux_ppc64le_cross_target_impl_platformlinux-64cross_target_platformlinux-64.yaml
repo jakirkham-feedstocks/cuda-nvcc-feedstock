@@ -12,8 +12,6 @@ cross_target_impl_platform:
 - linux-64
 cross_target_platform:
 - linux-64
-- linux-aarch64
-- linux-ppc64le
 cxx_compiler:
 - gxx
 cxx_compiler_version:
