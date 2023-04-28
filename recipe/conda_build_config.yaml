@@ -34,5 +34,5 @@ cross_target_impl_platform:
 
 zip_keys:
   -
-    - cross_target_impl_platform
     - cross_target_platform
+    - cross_target_impl_platform
