@@ -103,7 +103,7 @@ outputs:
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file:
-        - {{ PREFIX }}/targets/{{ ctk_targets[cross_target_platform] }}/LICENSE
+        - {{ PREFIX }}/targets/{{ ctk_targets[cross_target_impl_platform] }}/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
