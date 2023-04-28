@@ -22,3 +22,8 @@ cross_target_impl_platform:
     - linux-64
     - linux-aarch64
     - linux-ppc64le
+
+zip_keys:
+  -
+    - cross_target_impl_platform
+    - cross_target_platform
