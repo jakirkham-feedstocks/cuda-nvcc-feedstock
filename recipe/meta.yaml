@@ -80,6 +80,7 @@ outputs:
       doc_url: https://docs.nvidia.com/cuda/index.html
   {% endif %}
 
+  {% if target_platform == cross_target_impl_platform %}
   - name: cuda-nvcc_{{ cross_target_platform }}
     build:
       run_exports:
@@ -109,6 +110,7 @@ outputs:
       description: |
         Compiler for CUDA applications.
       doc_url: https://docs.nvidia.com/cuda/index.html
+  {% endif %}
 
   {% if target_platform == cross_target_platform %}
   - name: cuda-nvcc-impl_{{ cross_target_impl_platform }}
