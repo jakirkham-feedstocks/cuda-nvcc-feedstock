@@ -46,12 +46,12 @@ outputs:
       build:
         - {{ compiler("c") }}
         - {{ compiler("cxx") }}
-        - arm-variant * {{ arm_variant_type }}               # [aarch64]
-        - sysroot_{{ target_platform }} {{ glibc_version }}  # [linux]
+        - arm-variant * {{ arm_variant_type }}                     # [aarch64]
+        - sysroot_{{ cross_target_platform }} {{ glibc_version }}  # [linux]
       run:
         - c-compiler
         - cxx-compiler
-        - {{ pin_subpackage("cuda-nvcc_" + target_platform, exact=True) }}
+        - {{ pin_subpackage("cuda-nvcc_" + cross_target_platform, exact=True) }}
       run_constrained:
         - arm-variant * {{ arm_variant_type }}    # [aarch64]
     test:
@@ -68,7 +68,7 @@ outputs:
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file:
-        - {{ PREFIX }}/targets/{{ ctk_targets[target_platform] }}/LICENSE
+        - {{ PREFIX }}/targets/{{ ctk_targets[cross_target_platform] }}/LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
       summary: Compiler for CUDA applications.
