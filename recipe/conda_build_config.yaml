@@ -8,3 +8,8 @@ arm_variant_type:          # [aarch64]
 
 glibc_version:             # [linux]
   - 2.17                   # [linux]
+
+cross_target_platform:
+  - linux-64               # [linux]
+  - linux-aarch64          # [linux]
+  - linux-ppc64le          # [linux]
