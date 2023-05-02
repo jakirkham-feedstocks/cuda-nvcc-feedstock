@@ -89,9 +89,9 @@ outputs:
       run:
         # Safeguard for early parsing
         {% if cross_target_platform is defined %}
-        - {{ pin_subpackage("cuda-nvcc-impl_" + target_platform, exact=True) }}
         - {{ pin_subpackage("cuda-nvcc-impl_" + cross_target_platform, exact=True) }}  # [cross_target_platform != target_platform]
         {% endif %}
+        - {{ pin_subpackage("cuda-nvcc-impl_" + target_platform, exact=True) }}
     test:
       commands:
         - test -f $PREFIX/etc/conda/activate.d/~cuda-nvcc_activate.sh      # [linux]
