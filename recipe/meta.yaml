@@ -36,9 +36,8 @@ build:
   skip: true  # [osx or win]
 
 outputs:
+  {% if target_platform == cross_target_platform %}
   - name: cuda-nvcc
-    build:
-      skip: true  # [target_platform != cross_target_platform]
     files:
       - bin                                               # [linux]
       - lib/libnvptxcompiler_static.a                     # [linux]
@@ -76,6 +75,7 @@ outputs:
       description: |
         Compiler for CUDA applications.
       doc_url: https://docs.nvidia.com/cuda/index.html
+  {% endif %}
 
   - name: cuda-nvcc_{{ cross_target_platform }}
     build:
